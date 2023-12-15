@@ -42,7 +42,7 @@ jobs:
       - name: Commit and Push Changes
         run: |
            git config --global user.email "rafay.abbasi6671@gmail.com"
-           git config --global user.name "raffay6671"
+           git config --global user.name "Raffay6671"
            git config --local user.password "${{ secrets.GH_TOKEN }}"
          
            # Check if there are changes to commit
