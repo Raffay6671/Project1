@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+
+  doctors:
+    build:
+      context: doctors/
+      dockerfile: dockerfile
+    init: true
+    deploy:
+    networks:
+      - mynet
+
+  appointments:
+    build:
+      context: appointments/
+      dockerfile: dockerfile
+    init: true
+    deploy:
+    networks:
+      - mynet
+
+  frontend:
+    build:
+      context: frontend/
+      dockerfile: dockerfile
+    init: true
+    environment:
+      DOCTORS_SERVICE_URL: doctors:9094
+      APPOINTMENTS_SERVICE_URL: appointments:7074
+    deploy:
+    networks:
+      - mynet
+    ports:
+      - "5000:3000"
+    depends_on:
+      - doctors
+      - appointments
+
+  
+networks:
+  mynet:
+    driver: bridge
